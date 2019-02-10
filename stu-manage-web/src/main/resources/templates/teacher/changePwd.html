@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/jquery/css/main.css"/>
+
+</head>
+<body>
+
+<div th:include="navigator"></div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:include="sidebar"></div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <ol class="breadcrumb">
+                <li><a href="toMainPage">首页</a></li>
+                <!--<li><a href="user/page.html?pageNo=${param.pageNo }">数据列表</a></li>-->
+                <li><a href="getTeaInfo">个人信息</a></li>
+                <li class="active">修改密码</li>
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    表单数据
+                    <div style="float: right; cursor: pointer;" data-toggle="modal"
+                         data-target="#myModal">
+                        <i class="glyphicon glyphicon-question-sign"></i>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form  id="checkPasswdForm" action="updateTeaInfo" class="form-horizontal" role="form">
+                        <div id="passwdDiv" class="form-group">
+                            <label for="passwd" class="col-sm-2 control-label">原始密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="passwd"  class="form-control" id="passwd" placeholder="请输入原始密码" >
+                                <span id="passwdSpan" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" style="display: none"></span>
+                            </div>
+                        </div>
+                        <div id="newPasswdDiv" class="form-group">
+                            <label for="newPasswd" class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="newPasswd"  class="form-control" id="newPasswd" placeholder="请输入新密码" disabled>
+                            </div>
+                        </div>
+                        <div id="rePasswdDiv" class="form-group">
+                            <label for="rePasswd" class="col-sm-2 control-label">验证密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="rePasswd"  class="form-control" id="rePasswd" placeholder="请再一次输入新密码" disabled>
+                                <span id="rePasswdSpan"  class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" style="display:none"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="checkBtn" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-ok"></i>验证</button>
+                                <button type="button" id="updateBtn" class="btn btn-info">
+                                    <i class="glyphicon glyphicon-edit"></i>修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/jquery/jquery-2.1.1.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/script/docs.min.js"></script>
+<script type="text/javascript" src="/layer/layer.js"></script>
+</body>
+<script language="JavaScript">
+
+//验证原始密码
+    $("#checkBtn").click(function () {
+
+        var passwd = $("#passwd").val();
+        //passwd的值不为空且不等于空串
+        if (passwd!=null&&passwd!=''){
+            var param = {
+                passwd:passwd,
+            };
+            $.post("checkPwd",param,function (data) {
+                if (data=="SUCCESS"){
+                    layer.msg("验证成功！");
+//                $("input[name='newPasswd']").removeAttribute('disabled');
+//                $("input[name='rePasswd']").removeAttribute('disabled');
+                    $("#newPasswd").removeAttr("disabled");
+                    $("#rePasswd").removeAttr("disabled");
+                    //显示成功的输入框
+                    $("#passwdDiv").removeClass("has-warning has-feedback").removeClass("has-error has-feedback").addClass("has-success").addClass("has-feedback");
+                    $("#passwdSpan").removeClass("glyphicon-warning-sign").removeClass("glyphicon-remove").addClass("glyphicon-ok").show();
+                    $("#passwdSpan").show();
+                }
+                if(data=="FAILED"){
+                    //显示错误的输入框
+                    $("#passwdDiv").removeClass("has-success has-feedback").removeClass("has-warning has-feedback").addClass("has-error").addClass("has-feedback");
+                    $("#passwdSpan").removeClass("glyphicon-ok").removeClass("glyphicon-warning-sign").addClass("glyphicon-remove").show();
+                    layer.alert("验证失败！请重新输入");
+                    $("#passwd").val("");
+                }
+            });
+        }else {
+            //显示警告的输入框
+            $("#passwdDiv").removeClass("has-success has-feedback").removeClass("has-error has-feedback").addClass("has-warning has-feedback");
+            $("#passwdSpan").removeClass("glyphicon-ok").removeClass("glyphicon-remove").addClass("glyphicon-warning-sign").show();
+            layer.alert("原始密码不能为空！");
+        }
+
+    });
+    //保存修改后的密码
+    $("#updateBtn").click(function () {
+        var newPasswd = $("#newPasswd").val();
+        var rePasswd = $("#rePasswd").val();
+        if(newPasswd!=''&&newPasswd!=null&&rePasswd!=''&&rePasswd!=null){
+            //两次密码一致才保存
+            if(newPasswd==rePasswd){
+                $.post("updatePasswd",{newPasswd:newPasswd},function (data) {
+                    if (data=="SUCCESS"){
+                        layer.msg("修改成功！");
+                    }
+                    if(data=="FAILED"){
+                        layer.alert("修改失败！请重新输入");
+                        $("#newPasswd").val("");
+                        $("#rePasswd").val('');
+                    }
+                });
+            }else {
+                //不一致输入框变成红色的警告框
+                //添加样式
+                $("#rePasswdDiv").addClass("has-error").addClass("has-feedback");
+                $("#rePasswdSpan").show();
+                layer.alert("两次密码输入不一致，请重新输入");
+                $("#rePasswd").val('');
+            }
+        }else {
+            //如果新密码的值为空则
+            $("#newPasswdDiv").addClass("has-warning").addClass("has-feedback");
+            $("#passwdSpan").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign").show();
+
+        }
+    });
+</script>
+</html>

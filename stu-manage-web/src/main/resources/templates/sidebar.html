@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div class="col-sm-3 col-md-2 sidebar">
+        <div class="tree">
+            <ul style="padding-left:0px;" class="list-group">
+                <li class="list-group-item tree-closed" >
+                    <a href="main.html"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 学生管理 <span class="badge" style="float:right">3</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="user.html"><i class="glyphicon glyphicon-user"></i> 学生信息</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-time"></i> 学生考勤</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="permission.html"><i class="glyphicon glyphicon-edit"></i> 课堂点名</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-th"></i> 教师管理 <span class="badge" style="float:right">1</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-user"></i> 教师信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-th-list"></i> 学院管理 <span class="badge" style="float:right">3</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-briefcase"></i> 二级学院信息</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-book"></i> 专业信息</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-home"></i> 班级信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 排课管理 <span class="badge" style="float:right">1</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-list-alt"></i> 课表信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 课程管理 <span class="badge" style="float:right">1</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-tag"></i> 课程信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-th-list"></i> 考勤管理 <span class="badge" style="float:right">3</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-search"></i> 教师查询</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-search"></i> 学生查询</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-pencil"></i>考勤统计</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-th-list"></i> 请假管理 <span class="badge" style="float:right">3</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-tag"></i> 在线请假</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-check"></i>请假审批</a>
+                        </li>
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-search"></i>请假查询</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-asterisk"></i> 角色管理 <span class="badge" style="float:right">1</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item tree-closed">
+                    <span><i class="glyphicon glyphicon glyphicon-cog"></i> 权限管理 <span class="badge" style="float:right">1</span></span>
+                    <ul style="margin-top:10px;display:none;">
+                        <li style="height:30px;">
+                            <a href="role.html"><i class="glyphicon glyphicon-lock"></i> 权限分配</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--<li class="list-group-item tree-closed" >-->
+                <!--<a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://apps.bdimg.com/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function currentTime(){
+              var show_day=new Array('星期一','星期二','星期三','星期四','星期五','星期六','星期日');
+            var d=new Date(),str='';
+            var day=d.getDay();
+            str+='当前时间： '
+            str+=d.getFullYear()+'年';
+            str+=d.getMonth() + 1+'月';
+            str+=d.getDate()+'日';
+            str+='  ';
+            str+=show_day[day-1];
+            str+='  ';
+            str+=d.getHours()+'时';
+            str+=d.getMinutes()+'分';
+            str+= d.getSeconds()+'秒';
+            return str+day;
+        }
+        setInterval(function(){$('#time').html(currentTime)},1000);
+        function showTime(){
+//            var show_day=new Array('星期一','星期二','星期三','星期四','星期五','星期六','星期日');
+
+            var time=new Date();
+            var year=time.getYear();
+            var month=time.getMonth();
+            var date=time.getDate();
+            var day=time.getDay();
+            var hour=time.getHours();
+            var minutes=time.getMinutes();
+            var second=time.getSeconds();
+            switch(day)
+            {
+                case 0:
+                    day="星期日";
+                    break;
+                case 1:
+                    day="星期一";
+                    break;
+                case 2:
+                    day="星期二";
+                    break;
+                case 3:
+                    day="星期三";
+                    break;
+                case 4:
+                    day="星期四";
+                    break;
+                case 5:
+                    day="星期五";
+                    break;
+                case 6:
+                    day="星期六";
+                    break;
+            }
+            month<10?month='0'+month:month;
+            month=month+1;
+            hour<10?hour='0'+hour:hour;
+            minutes<10?minutes='0'+minutes:minutes;
+            second<10?second='0'+second:second;
+            var now_time='当前时间：'+year+'年'+month+'月'+date+'日'+' '+day+' '+hour+':'+minutes+':'+second ;
+//            document.getElementById('#showtime').innerHTML=now_time;
+//            setTimeout("showTime();",1000);
+            return now_time;
+
+        }
+          setInterval(function(){$('#showtime').html(showTime)},1000);
+    </script>
+
+
+</head>
+<body>
+<div id="time"></div>
+<div id="showtime"></div>
+<a href="#" onclick="test()"> 跳转 </a>
+</body>
+<script language="JavaScript">
+    function test() {
+        window.location.href="http.baidu.com";
+    }
+</script>
+</html>
